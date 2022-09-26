@@ -7,12 +7,13 @@ import ToyContainer from "./ToyContainer";
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [toys, setToys] = useState([]);
+	const[whenUpdated, setWhenUpdated] =useState(false)
 
   useEffect(() => {
     fetch("/toys")
       .then((r) => r.json())
       .then(setToys);
-  }, []);
+  }, [whenUpdated]);
 
   function handleClick() {
     setShowForm((showForm) => !showForm);
@@ -31,6 +32,7 @@ function App() {
     const updatedToys = toys.map((toy) =>
       toy.id === updatedToy.id ? updatedToy : toy
     );
+		setWhenUpdated(()=> !whenUpdated)
     setToys(updatedToys);
   }
 
